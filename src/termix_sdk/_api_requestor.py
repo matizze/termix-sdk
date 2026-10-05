@@ -20,6 +20,7 @@ from urllib.parse import urljoin
 
 from . import _util
 from ._client_options import ClientOptions
+from ._compat_routes import rewrite_path
 from ._error import APIConnectionError, error_for_status
 from ._http_client import (
     RETRIABLE_STATUS_CODES,
@@ -92,6 +93,7 @@ class APIRequestor:
         files: Mapping[str, Any] | None = None,
         options: RequestOptions | None = None,
     ) -> TermixResponse | None:
+        path = rewrite_path(method, path)
         url = self._url_for(service, path)
         headers = self._headers(options)
         timeout = (options or {}).get("timeout", self._options.timeout)
@@ -125,6 +127,7 @@ class APIRequestor:
         """For `application/octet-stream` responses (file downloads). Never
         retried — see `HTTPClient.request_stream`.
         """
+        path = rewrite_path(method, path)
         url = self._url_for(service, path)
         headers = self._headers(options)
         timeout = (options or {}).get("timeout", self._options.timeout)
@@ -152,6 +155,7 @@ class APIRequestor:
         `request_stream` — a partially-streamed connection can't be
         safely replayed.
         """
+        path = rewrite_path(method, path)
         url = self._url_for(service, path)
         headers = self._headers(options)
         headers["Accept"] = "text/event-stream"
@@ -274,6 +278,7 @@ class AsyncAPIRequestor:
         files: Mapping[str, Any] | None = None,
         options: RequestOptions | None = None,
     ) -> TermixResponse | None:
+        path = rewrite_path(method, path)
         url = self._url_for(service, path)
         headers = self._headers(options)
         timeout = (options or {}).get("timeout", self._options.timeout)
@@ -306,6 +311,7 @@ class AsyncAPIRequestor:
     ):
         from ._response import AsyncTermixStreamResponse
 
+        path = rewrite_path(method, path)
         url = self._url_for(service, path)
         headers = self._headers(options)
         timeout = (options or {}).get("timeout", self._options.timeout)
@@ -330,6 +336,7 @@ class AsyncAPIRequestor:
         options: RequestOptions | None = None,
     ) -> AsyncIterator[SSEEvent]:
         """Async mirror of `APIRequestor.request_sse()` — see its docstring."""
+        path = rewrite_path(method, path)
         url = self._url_for(service, path)
         headers = self._headers(options)
         headers["Accept"] = "text/event-stream"
