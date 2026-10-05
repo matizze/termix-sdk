@@ -92,6 +92,34 @@ export function discoverRoutes(
     return [...seen.values()];
   }
 
+  /**
+   * Termix 2.9 plugin support. A plugin's backend lives under
+   * `plugins/<id>/src/backend/` and is mounted by the plugin host at
+   * `/plugin-api/<id>` (HTTP) — a runtime mount that never appears as an
+   * in-source `app.use(...)`, so Phase 1 has to synthesize it.
+   */
+  function pluginIdForFile(file: string): string | null {
+    const match = /^plugins\/([^/]+)\//.exec(file);
+    return match ? match[1] : null;
+  }
+
+  const pluginAppOrigins = new Map<string, OriginNode>();
+  function pluginAppOrigin(pluginId: string): OriginNode {
+    const key = `plugin-host:${pluginId}`;
+    let origin = pluginAppOrigins.get(key);
+    if (!origin) {
+      origin = {
+        key,
+        kind: "app",
+        file: `plugins/${pluginId}/__plugin_host__.ts`,
+        line: 0,
+        varName: `plugin(${pluginId})`,
+      };
+      pluginAppOrigins.set(key, origin);
+    }
+    return origin;
+  }
+
   /** Resolves any expression to the express()/Router() instantiation site(s) it ultimately refers to. */
   function resolveOrigin(exprIn: Node, depth = 0): OriginNode[] {
     if (depth > 40) return []; // runaway guard
@@ -118,6 +146,12 @@ export function discoverRoutes(
         return [makeOrigin(expr, "router", "Router()")];
       }
       if (Node.isPropertyAccessExpression(callee) && callee.getName() === "Router") {
+        return [makeOrigin(expr, "router", `${callee.getText()}()`)];
+      }
+      // Termix 2.9 plugins receive their express Router from the host via
+      // `ctx.http.router<Router>()` (also called with an options object, e.g.
+      // `ctx.http.router<Router>({ bodyLimit: "1gb" })`). Treat it as a router origin.
+      if (Node.isPropertyAccessExpression(callee) && callee.getName() === "router") {
         return [makeOrigin(expr, "router", `${callee.getText()}()`)];
       }
       return [];
@@ -455,7 +489,10 @@ export function discoverRoutes(
 
   const backendFiles = project
     .getSourceFiles()
-    .filter((sf) => toRel(sf.getFilePath()).startsWith("src/backend/"));
+    .filter((sf) => {
+      const rel = toRel(sf.getFilePath());
+      return rel.startsWith("src/backend/") || rel.startsWith("plugins/");
+    });
 
   for (const sf of backendFiles) visitFile(sf);
 
@@ -476,6 +513,21 @@ export function discoverRoutes(
   function serviceInfoFor(appOrigin: OriginNode): ServiceInfo {
     const existing = serviceInfoByFile.get(appOrigin.file);
     if (existing) return existing;
+    const pluginId = pluginIdForFile(appOrigin.file);
+    if (pluginId) {
+      // Plugin HTTP routes are served by the main backend app (port 30001) under
+      // /plugin-api/<id>; the plugin host enforces auth globally for them.
+      const info: ServiceInfo = {
+        key: `plugin-${pluginId}`,
+        file: appOrigin.file,
+        port: 30001,
+        globalAuth: true,
+        globalAuthLine: null,
+        bodyLimits: {},
+      };
+      serviceInfoByFile.set(appOrigin.file, info);
+      return info;
+    }
     const sf = project.getSourceFiles().find((f) => toRel(f.getFilePath()) === appOrigin.file);
     const scanned = findPortInFile(sf);
     const configEntry = servicesConfig[appOrigin.file];
@@ -532,7 +584,6 @@ export function discoverRoutes(
 
   const prefixMemo = new Map<string, Reached[]>();
   function prefixTo(node: OriginNode, stack: Set<string> = new Set()): Reached[] {
-    if (node.kind === "app") return [{ appOrigin: node, prefix: "" }];
     const cached = prefixMemo.get(node.key);
     if (cached) return cached;
     if (stack.has(node.key)) return [];
@@ -543,6 +594,20 @@ export function discoverRoutes(
     for (const edge of edges) {
       for (const parent of prefixTo(edge.from, stack)) {
         out.push({ appOrigin: parent.appOrigin, prefix: joinPaths(parent.prefix, edge.prefix) });
+      }
+    }
+    // A top-level express() app is a root only when nothing mounts it and it is
+    // not inside a plugin. Plugins may create their own express() app and mount
+    // it from the plugin router, so those must keep traversing their mount edges.
+    if (out.length === 0 && node.kind === "app" && !pluginIdForFile(node.file)) {
+      out.push({ appOrigin: node, prefix: "" });
+    }
+    // A plugin's root router (or its own unmounted express() app) has no in-source
+    // mount edge — the host mounts it at /plugin-api/<id>. Synthesize that prefix.
+    if (out.length === 0) {
+      const pluginId = pluginIdForFile(node.file);
+      if (pluginId) {
+        out.push({ appOrigin: pluginAppOrigin(pluginId), prefix: `/plugin-api/${pluginId}` });
       }
     }
     stack.delete(node.key);

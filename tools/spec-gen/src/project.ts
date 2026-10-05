@@ -14,7 +14,15 @@ export function loadBackendProject(repoPath: string): Project {
   if (!existsSync(tsConfigFilePath)) {
     throw new Error(`tsconfig.node.json not found at ${tsConfigFilePath}`);
   }
-  return new Project({ tsConfigFilePath, skipAddingFilesFromTsConfig: false });
+  const project = new Project({ tsConfigFilePath, skipAddingFilesFromTsConfig: false });
+  // Termix 2.9 moved host features (docker, file-manager, snippets, tunnels, ...) into
+  // plugins served from `plugins/<id>/src/backend`. Those files are outside
+  // tsconfig.node.json's include, so add them explicitly or Phase 1 never sees them.
+  project.addSourceFilesAtPaths([
+    join(repoPath, "plugins/*/src/backend/**/*.ts"),
+    join(repoPath, "packages/plugin-sdk/src/**/*.ts"),
+  ]);
+  return project;
 }
 
 /**

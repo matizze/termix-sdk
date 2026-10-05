@@ -1,281 +1,5 @@
 [
   {
-    "routeId": "src/backend/database/routes/automations.ts#L337:POST:/automations",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "creates an automation from a valid definition",
-    "request": {
-      "body": {
-        "name": "Disk watch",
-        "definition": "<expr>"
-      }
-    },
-    "response": {
-      "status": 201
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L337:POST:/automations",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "requires a name",
-    "request": {
-      "body": {
-        "definition": "<expr>"
-      }
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L337:POST:/automations",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "rejects an unknown trigger kind",
-    "request": {
-      "body": {
-        "name": "Bad",
-        "definition": {
-          "version": 1,
-          "trigger": {
-            "kind": "nope"
-          },
-          "steps": []
-        }
-      }
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L337:POST:/automations",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "rejects an unknown operator",
-    "request": {
-      "body": {
-        "name": "Bad",
-        "definition": "<expr>"
-      }
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L337:POST:/automations",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "rejects an unknown step type",
-    "request": {
-      "body": {
-        "name": "Bad",
-        "definition": "<expr>"
-      }
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L337:POST:/automations",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "rejects duplicate step ids, including inside a branch",
-    "request": {
-      "body": {
-        "name": "Bad",
-        "definition": "<expr>"
-      }
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L337:POST:/automations",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "rejects an invalid cron expression",
-    "request": {
-      "body": {
-        "name": "Bad",
-        "definition": "<expr>"
-      }
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L337:POST:/automations",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "rejects an interval under a minute",
-    "request": {
-      "body": {
-        "name": "Bad",
-        "definition": "<expr>"
-      }
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L337:POST:/automations",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "registers a schedule for a schedule trigger",
-    "request": {
-      "body": {
-        "name": "Nightly",
-        "definition": "<expr>"
-      }
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L337:POST:/automations",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "returns a webhook token once and stores only its hash",
-    "request": {
-      "body": {
-        "name": "Hooked",
-        "definition": "<expr>"
-      }
-    },
-    "response": {
-      "status": 201
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L337:POST:/automations",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "stores the automation against the caller, not a supplied user id",
-    "request": {
-      "body": {
-        "name": "Mine",
-        "definition": "<expr>",
-        "userId": "user-2",
-        "user_id": "user-2"
-      }
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L246:GET:/automations",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "GET /",
-    "itTitle": "only returns the caller's automations",
-    "response": {
-      "status": 200
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L537:DELETE:/automations/:id",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "DELETE /:id",
-    "itTitle": "will not delete another user's automation",
-    "request": {
-      "params": {
-        "id": "1"
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L607:POST:/automations/:id/run",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /:id/run",
-    "itTitle": "runs an owned automation",
-    "request": {
-      "params": {
-        "id": "1"
-      }
-    },
-    "response": {
-      "status": 200
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L607:POST:/automations/:id/run",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /:id/run",
-    "itTitle": "passes the dry-run flag through",
-    "request": {
-      "params": {
-        "id": "1"
-      },
-      "body": {
-        "dryRun": true
-      }
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L607:POST:/automations/:id/run",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /:id/run",
-    "itTitle": "refuses to run someone else's automation",
-    "request": {
-      "params": {
-        "id": "1"
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L770:POST:/automations/webhook/:token",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /webhook/:token",
-    "itTitle": "runs the automation matching the token",
-    "request": {
-      "params": {
-        "token": "<expr>"
-      },
-      "body": {
-        "hello": "world"
-      }
-    },
-    "response": {
-      "status": 202
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L770:POST:/automations/webhook/:token",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /webhook/:token",
-    "itTitle": "rejects a token that does not match",
-    "request": {
-      "params": {
-        "token": "<expr>"
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/automations.ts#L770:POST:/automations/webhook/:token",
-    "testFile": "src/backend/tests/database/routes/automations.test.ts",
-    "describeTitle": "POST /webhook/:token",
-    "itTitle": "rejects a token too short to be real",
-    "request": {
-      "params": {
-        "token": "short"
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
     "routeId": "src/backend/database/routes/branding-routes.ts#L110:GET:/users/branding",
     "testFile": "src/backend/tests/database/routes/branding-routes.test.ts",
     "describeTitle": "GET /users/branding",
@@ -392,384 +116,142 @@
     }
   },
   {
-    "routeId": "src/backend/database/routes/fleet-routes.ts#L337:GET:/fleets/:id/members",
-    "testFile": "src/backend/tests/database/routes/fleet-routes.test.ts",
-    "describeTitle": "GET /:id/members",
-    "itTitle": "404s for a fleet the caller does not own",
+    "routeId": "src/backend/database/routes/dashboard-routes.ts#L45:GET:/dashboard/uptime",
+    "testFile": "src/backend/tests/database/routes/dashboard-routes.test.ts",
+    "describeTitle": "GET /dashboard/uptime",
+    "itTitle": "returns a formatted uptime",
+    "response": {
+      "status": 200
+    }
+  },
+  {
+    "routeId": "src/backend/database/routes/dashboard-routes.ts#L86:GET:/dashboard/activity/recent",
+    "testFile": "src/backend/tests/database/routes/dashboard-routes.test.ts",
+    "describeTitle": "GET /dashboard/activity/recent",
+    "itTitle": "401s when the user's data key is not unlocked",
+    "response": {
+      "status": 401
+    }
+  },
+  {
+    "routeId": "src/backend/database/routes/dashboard-routes.ts#L86:GET:/dashboard/activity/recent",
+    "testFile": "src/backend/tests/database/routes/dashboard-routes.test.ts",
+    "describeTitle": "GET /dashboard/activity/recent",
+    "itTitle": "returns the user's recent activity",
+    "response": {
+      "status": 200
+    }
+  },
+  {
+    "routeId": "src/backend/database/routes/dashboard-routes.ts#L150:POST:/dashboard/activity/log",
+    "testFile": "src/backend/tests/database/routes/dashboard-routes.test.ts",
+    "describeTitle": "POST /dashboard/activity/log",
+    "itTitle": "rejects a body missing required fields",
     "request": {
-      "params": {
-        "id": "999"
-      }
+      "headers": {
+        "\"content-type\"": "application/json"
+      },
+      "body": "<expr>"
+    },
+    "response": {
+      "status": 400
+    }
+  },
+  {
+    "routeId": "src/backend/database/routes/dashboard-routes.ts#L150:POST:/dashboard/activity/log",
+    "testFile": "src/backend/tests/database/routes/dashboard-routes.test.ts",
+    "describeTitle": "POST /dashboard/activity/log",
+    "itTitle": "logs a valid activity",
+    "request": {
+      "headers": {
+        "\"content-type\"": "application/json"
+      },
+      "body": "<expr>"
+    },
+    "response": {
+      "status": 200
+    }
+  },
+  {
+    "routeId": "src/backend/database/routes/dashboard-routes.ts#L150:POST:/dashboard/activity/log",
+    "testFile": "src/backend/tests/database/routes/dashboard-routes.test.ts",
+    "describeTitle": "POST /dashboard/activity/log",
+    "itTitle": "404s a host the user cannot access",
+    "request": {
+      "headers": {
+        "\"content-type\"": "application/json"
+      },
+      "body": "<expr>"
     },
     "response": {
       "status": 404
     }
   },
   {
-    "routeId": "src/backend/database/routes/fleet-routes.ts#L337:GET:/fleets/:id/members",
-    "testFile": "src/backend/tests/database/routes/fleet-routes.test.ts",
-    "describeTitle": "GET /:id/members",
-    "itTitle": "400s on a non-numeric fleet id",
-    "request": {
-      "params": {
-        "id": "not-a-number"
-      }
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/fleet-routes.ts#L877:POST:/fleets/:id/execute",
-    "testFile": "src/backend/tests/database/routes/fleet-routes.test.ts",
-    "describeTitle": "POST /:id/execute",
-    "itTitle": "400s when command is missing",
-    "request": {
-      "params": {
-        "id": "1"
-      },
-      "body": {}
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/fleet-routes.ts#L877:POST:/fleets/:id/execute",
-    "testFile": "src/backend/tests/database/routes/fleet-routes.test.ts",
-    "describeTitle": "POST /:id/execute",
-    "itTitle": "reports per-host success with the {hostId, hostName, success} shape",
-    "request": {
-      "params": {
-        "id": "1"
-      },
-      "body": {
-        "command": "uptime"
-      }
-    },
+    "routeId": "src/backend/database/routes/dashboard-routes.ts#L218:DELETE:/dashboard/activity/reset",
+    "testFile": "src/backend/tests/database/routes/dashboard-routes.test.ts",
+    "describeTitle": "DELETE /dashboard/activity/reset",
+    "itTitle": "clears the user's recent activity",
     "response": {
       "status": 200
     }
   },
   {
-    "routeId": "src/backend/database/routes/fleet-routes.ts#L877:POST:/fleets/:id/execute",
-    "testFile": "src/backend/tests/database/routes/fleet-routes.test.ts",
-    "describeTitle": "POST /:id/execute",
-    "itTitle": "isolates one host's access denial - the other host still succeeds",
-    "request": {
-      "params": {
-        "id": "1"
-      },
-      "body": {
-        "command": "uptime"
-      }
+    "routeId": "src/backend/database/routes/host-status-routes.ts#L65:GET:/host/status",
+    "testFile": "src/backend/tests/database/routes/host-status-routes.test.ts",
+    "describeTitle": "GET /host/status",
+    "itTitle": "answers 401 while the user's data is locked",
+    "response": {
+      "status": 401
     }
   },
   {
-    "routeId": "src/backend/database/routes/fleet-routes.ts#L877:POST:/fleets/:id/execute",
-    "testFile": "src/backend/tests/database/routes/fleet-routes.test.ts",
-    "describeTitle": "POST /:id/execute",
-    "itTitle": "404s for a fleet the caller does not own",
-    "request": {
-      "params": {
-        "id": "999"
-      },
-      "body": {
-        "command": "uptime"
-      }
-    },
+    "routeId": "src/backend/database/routes/host-status-routes.ts#L228:GET:/host/status/:id",
+    "testFile": "src/backend/tests/database/routes/host-status-routes.test.ts",
+    "describeTitle": "GET /host/status/:id",
+    "itTitle": "hides a host the user cannot reach",
     "response": {
       "status": 404
     }
   },
   {
-    "routeId": "src/backend/database/routes/fleet-routes.ts#L1384:POST:/fleets/:id/packages",
-    "testFile": "src/backend/tests/database/routes/fleet-routes.test.ts",
-    "describeTitle": "POST /:id/packages",
-    "itTitle": "400s on an invalid action",
-    "request": {
-      "params": {
-        "id": "1"
-      },
-      "body": {
-        "action": "reformat-disk"
-      }
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/fleet-routes.ts#L1384:POST:/fleets/:id/packages",
-    "testFile": "src/backend/tests/database/routes/fleet-routes.test.ts",
-    "describeTitle": "POST /:id/packages",
-    "itTitle": "surfaces an ElevationError as a per-host error, not a request failure",
-    "request": {
-      "params": {
-        "id": "1"
-      },
-      "body": {
-        "action": "install",
-        "package": "curl"
-      }
-    },
+    "routeId": "src/backend/database/routes/host-status-routes.ts#L193:POST:/host/status/refresh",
+    "testFile": "src/backend/tests/database/routes/host-status-routes.test.ts",
+    "describeTitle": "POST /host/status/refresh",
+    "itTitle": "restarts the user's checks",
     "response": {
       "status": 200
     }
   },
   {
-    "routeId": "src/backend/database/routes/fleet-routes.ts#L1384:POST:/fleets/:id/packages",
-    "testFile": "src/backend/tests/database/routes/fleet-routes.test.ts",
-    "describeTitle": "POST /:id/packages",
-    "itTitle": "requires manage-level access, not just edit",
-    "request": {
-      "params": {
-        "id": "1"
-      },
-      "body": {
-        "action": "upgrade-all"
-      }
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/fleet-routes.ts#L422:POST:/fleets/:id/members",
-    "testFile": "src/backend/tests/database/routes/fleet-routes.test.ts",
-    "describeTitle": "POST /:id/members",
-    "itTitle": "404s when the caller cannot access the target host",
-    "request": {
-      "params": {
-        "id": "1"
-      },
-      "body": {
-        "hostId": 99
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-image-storage-routes.ts#L197:GET:/users/terminal-image-storage-settings",
-    "testFile": "src/backend/tests/database/routes/terminal-image-storage-settings-route.test.ts",
-    "describeTitle": "GET /users/terminal-image-storage-settings",
-    "itTitle": "returns the public settings shape without the backend localDir",
-    "response": {
-      "status": 200,
-      "body": {
-        "mode": "local",
-        "hostPath": "/mnt/images",
-        "ttlMs": null,
-        "maxCount": 100,
-        "maxBytes": null,
-        "localMappingConfigured": true
-      },
-      "partial": false
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-image-storage-routes.ts#L235:PATCH:/users/terminal-image-storage-settings",
-    "testFile": "src/backend/tests/database/routes/terminal-image-storage-settings-route.test.ts",
-    "describeTitle": "PATCH /users/terminal-image-storage-settings",
-    "itTitle": "rejects an invalid mode with a safe 400",
-    "response": {
-      "status": 400,
-      "body": {
-        "error": "Invalid value for mode",
-        "code": "IMAGE_STORAGE_SETTINGS_INVALID",
-        "field": "mode"
-      },
-      "partial": false
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-image-storage-routes.ts#L235:PATCH:/users/terminal-image-storage-settings",
-    "testFile": "src/backend/tests/database/routes/terminal-image-storage-settings-route.test.ts",
-    "describeTitle": "PATCH /users/terminal-image-storage-settings",
-    "itTitle": "rejects a relative localDir",
-    "response": {
-      "status": 400,
-      "body": {
-        "code": "IMAGE_STORAGE_SETTINGS_INVALID",
-        "field": "localDir"
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-image-storage-routes.ts#L235:PATCH:/users/terminal-image-storage-settings",
-    "testFile": "src/backend/tests/database/routes/terminal-image-storage-settings-route.test.ts",
-    "describeTitle": "PATCH /users/terminal-image-storage-settings",
-    "itTitle": "rejects out-of-range numeric limits",
-    "response": {
-      "status": 400,
-      "body": {
-        "code": "IMAGE_STORAGE_SETTINGS_INVALID",
-        "field": "maxBytes"
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-image-storage-routes.ts#L235:PATCH:/users/terminal-image-storage-settings",
-    "testFile": "src/backend/tests/database/routes/terminal-image-storage-settings-route.test.ts",
-    "describeTitle": "PATCH /users/terminal-image-storage-settings",
-    "itTitle": "rejects unknown fields without writing anything",
-    "response": {
-      "status": 400,
-      "body": {
-        "code": "IMAGE_STORAGE_SETTINGS_UNKNOWN_FIELD"
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-image-storage-routes.ts#L279:POST:/users/terminal-image-storage-settings/test",
-    "testFile": "src/backend/tests/database/routes/terminal-image-storage-settings-route.test.ts",
-    "describeTitle": "POST /users/terminal-image-storage-settings/test",
-    "itTitle": "requires an instanceId",
-    "response": {
-      "status": 400,
-      "body": {
-        "code": "IMAGE_SESSION_MISSING"
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-image-storage-routes.ts#L279:POST:/users/terminal-image-storage-settings/test",
-    "testFile": "src/backend/tests/database/routes/terminal-image-storage-settings-route.test.ts",
-    "describeTitle": "POST /users/terminal-image-storage-settings/test",
-    "itTitle": "reports unavailable storage when no session is connected",
-    "response": {
-      "status": 200,
-      "body": {
-        "mode": "auto",
-        "connected": false,
-        "remoteSftpAvailable": false,
-        "localHostVisible": null,
-        "selectedMode": "unavailable",
-        "localMappingConfigured": false
-      },
-      "partial": false
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-image-storage-routes.ts#L279:POST:/users/terminal-image-storage-settings/test",
-    "testFile": "src/backend/tests/database/routes/terminal-image-storage-settings-route.test.ts",
-    "describeTitle": "POST /users/terminal-image-storage-settings/test",
-    "itTitle": "probes local visibility through the connected session only",
-    "response": {
-      "status": 200,
-      "body": {
-        "mode": "auto",
-        "connected": true,
-        "remoteSftpAvailable": true,
-        "localHostVisible": true,
-        "selectedMode": "local",
-        "localMappingConfigured": true
-      },
-      "partial": false
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-image-storage-routes.ts#L279:POST:/users/terminal-image-storage-settings/test",
-    "testFile": "src/backend/tests/database/routes/terminal-image-storage-settings-route.test.ts",
-    "describeTitle": "POST /users/terminal-image-storage-settings/test",
-    "itTitle": "does not probe sessions owned by other instance IDs",
-    "response": {
-      "status": 200,
-      "body": {
-        "connected": false,
-        "remoteSftpAvailable": false,
-        "localHostVisible": null,
-        "selectedMode": "unavailable"
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-totp-routes.ts#L373:POST:/users/totp/disable",
-    "testFile": "src/backend/tests/database/routes/totp-disable-route.test.ts",
-    "describeTitle": "POST /totp/disable",
-    "itTitle": "reveals the existing enrollment only after re-authentication",
-    "response": {
-      "status": 401
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-totp-routes.ts#L373:POST:/users/totp/disable",
-    "testFile": "src/backend/tests/database/routes/totp-disable-route.test.ts",
-    "describeTitle": "POST /totp/disable",
-    "itTitle": "requires a credential before adding another authenticator",
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-totp-routes.ts#L373:POST:/users/totp/disable",
-    "testFile": "src/backend/tests/database/routes/totp-disable-route.test.ts",
-    "describeTitle": "POST /totp/disable",
-    "itTitle": "accepts the TOTP code on its own",
+    "routeId": "src/backend/database/routes/plugins.ts#L68:GET:/plugins/public",
+    "testFile": "src/backend/tests/database/routes/plugins.test.ts",
+    "describeTitle": "GET /plugins/public",
+    "itTitle": "lists only enabled plugins that opt into guest pages",
     "response": {
       "status": 200
     }
   },
   {
-    "routeId": "src/backend/database/routes/user-totp-routes.ts#L373:POST:/users/totp/disable",
-    "testFile": "src/backend/tests/database/routes/totp-disable-route.test.ts",
-    "describeTitle": "POST /totp/disable",
-    "itTitle": "accepts the account password on its own",
+    "routeId": "src/backend/database/routes/plugins.ts#L131:GET:/plugins/public-manifest",
+    "testFile": "src/backend/tests/database/routes/plugins.test.ts",
+    "describeTitle": "GET /plugins/public-manifest",
+    "itTitle": "lists only running plugins with login or second-factor UI, and nothing sensitive",
     "response": {
       "status": 200
     }
   },
   {
-    "routeId": "src/backend/database/routes/user-totp-routes.ts#L373:POST:/users/totp/disable",
-    "testFile": "src/backend/tests/database/routes/totp-disable-route.test.ts",
-    "describeTitle": "POST /totp/disable",
-    "itTitle": "accepts a backup code",
-    "response": {
-      "status": 200
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-totp-routes.ts#L373:POST:/users/totp/disable",
-    "testFile": "src/backend/tests/database/routes/totp-disable-route.test.ts",
-    "describeTitle": "POST /totp/disable",
-    "itTitle": "still refuses a wrong value",
-    "response": {
-      "status": 401
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-totp-routes.ts#L373:POST:/users/totp/disable",
-    "testFile": "src/backend/tests/database/routes/totp-disable-route.test.ts",
-    "describeTitle": "POST /totp/disable",
-    "itTitle": "refuses an empty request rather than disabling anything",
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-totp-routes.ts#L373:POST:/users/totp/disable",
-    "testFile": "src/backend/tests/database/routes/totp-disable-route.test.ts",
-    "describeTitle": "POST /totp/disable",
-    "itTitle": "does not let an OIDC user disable it with a password",
-    "response": {
-      "status": 401
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-admin-routes.ts#L76:GET:/users/list",
+    "routeId": "src/backend/database/routes/user-admin-routes.ts#L82:GET:/users/list",
     "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
     "describeTitle": "GET /list",
-    "itTitle": "includes data_unlocked and totp_enabled for admin callers",
+    "itTitle": "includes data_unlocked and second_factor_enabled for admin callers",
     "response": {
       "status": 200
     }
   },
   {
-    "routeId": "src/backend/database/routes/user-admin-routes.ts#L76:GET:/users/list",
+    "routeId": "src/backend/database/routes/user-admin-routes.ts#L82:GET:/users/list",
     "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
     "describeTitle": "GET /list",
     "itTitle": "returns one page and the full total when a limit is given",
@@ -780,7 +262,7 @@
     }
   },
   {
-    "routeId": "src/backend/database/routes/user-admin-routes.ts#L76:GET:/users/list",
+    "routeId": "src/backend/database/routes/user-admin-routes.ts#L82:GET:/users/list",
     "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
     "describeTitle": "GET /list",
     "itTitle": "pages with an offset",
@@ -792,7 +274,7 @@
     }
   },
   {
-    "routeId": "src/backend/database/routes/user-admin-routes.ts#L76:GET:/users/list",
+    "routeId": "src/backend/database/routes/user-admin-routes.ts#L82:GET:/users/list",
     "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
     "describeTitle": "GET /list",
     "itTitle": "filters by search term without a limit",
@@ -803,7 +285,7 @@
     }
   },
   {
-    "routeId": "src/backend/database/routes/user-admin-routes.ts#L76:GET:/users/list",
+    "routeId": "src/backend/database/routes/user-admin-routes.ts#L82:GET:/users/list",
     "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
     "describeTitle": "GET /list",
     "itTitle": "caps an oversized page size",
@@ -814,7 +296,7 @@
     }
   },
   {
-    "routeId": "src/backend/database/routes/user-admin-routes.ts#L76:GET:/users/list",
+    "routeId": "src/backend/database/routes/user-admin-routes.ts#L82:GET:/users/list",
     "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
     "describeTitle": "GET /list",
     "itTitle": "ignores a non-numeric limit and returns the full list",
@@ -825,63 +307,7 @@
     }
   },
   {
-    "routeId": "src/backend/database/routes/user-admin-routes.ts#L703:POST:/users/admin/totp/disable",
-    "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
-    "describeTitle": "POST /admin/totp/disable",
-    "itTitle": "clears TOTP fields for the target and audits",
-    "request": {
-      "body": {
-        "userId": "target1"
-      }
-    },
-    "response": {
-      "status": 200
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-admin-routes.ts#L703:POST:/users/admin/totp/disable",
-    "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
-    "describeTitle": "POST /admin/totp/disable",
-    "itTitle": "403s when the caller is not an admin",
-    "request": {
-      "body": {
-        "userId": "locked1"
-      }
-    },
-    "response": {
-      "status": 403
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-admin-routes.ts#L703:POST:/users/admin/totp/disable",
-    "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
-    "describeTitle": "POST /admin/totp/disable",
-    "itTitle": "400s when TOTP is not enabled for the target",
-    "request": {
-      "body": {
-        "userId": "locked1"
-      }
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-admin-routes.ts#L703:POST:/users/admin/totp/disable",
-    "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
-    "describeTitle": "POST /admin/totp/disable",
-    "itTitle": "404s for an unknown target",
-    "request": {
-      "body": {
-        "userId": "ghost"
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/user-admin-routes.ts#L789:GET:/users/admin/export/:userId",
+    "routeId": "src/backend/database/routes/user-admin-routes.ts#L828:GET:/users/admin/export/:userId",
     "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
     "describeTitle": "GET /admin/export/:userId",
     "itTitle": "423s when the target's data is locked",
@@ -895,7 +321,7 @@
     }
   },
   {
-    "routeId": "src/backend/database/routes/user-admin-routes.ts#L789:GET:/users/admin/export/:userId",
+    "routeId": "src/backend/database/routes/user-admin-routes.ts#L828:GET:/users/admin/export/:userId",
     "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
     "describeTitle": "GET /admin/export/:userId",
     "itTitle": "403s when the caller is not an admin",
@@ -909,24 +335,13 @@
     }
   },
   {
-    "routeId": "src/backend/database/routes/workspaces.ts#L61:GET:/workspaces",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "GET /",
-    "itTitle": "returns the list with a computed tabCount",
+    "routeId": "src/backend/database/routes/user-admin-routes.ts#L751:DELETE:/users/admin/:userId/second-factors",
+    "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
+    "describeTitle": "DELETE /admin/:userId/second-factors",
+    "itTitle": "clears every factor, including one whose plugin is gone, and audits",
     "request": {
-      "body": {
-        "name": "Test A",
-        "payload": {
-          "version": 1,
-          "tabs": [
-            {
-              "slotId": "a"
-            },
-            {
-              "slotId": "b"
-            }
-          ]
-        }
+      "params": {
+        "userId": "target1"
       }
     },
     "response": {
@@ -934,474 +349,27 @@
     }
   },
   {
-    "routeId": "src/backend/database/routes/workspaces.ts#L110:POST:/workspaces",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "400s when name is missing",
-    "request": {
-      "body": {
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L110:POST:/workspaces",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "400s when payload has no tabs array",
-    "request": {
-      "body": {
-        "name": "Test A",
-        "payload": {
-          "version": 1
-        }
-      }
-    },
-    "response": {
-      "status": 400
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L110:POST:/workspaces",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "POST /",
-    "itTitle": "200s and creates a manual workspace",
-    "request": {
-      "body": {
-        "name": "Test A",
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "status": 200,
-      "body": {
-        "name": "Test A",
-        "kind": "manual"
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L253:PATCH:/workspaces/:id",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "PATCH /:id",
-    "itTitle": "rejects renaming the last_session row",
-    "request": {
-      "body": {
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L253:PATCH:/workspaces/:id",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "PATCH /:id",
-    "itTitle": "renames a manual workspace",
-    "request": {
-      "body": {
-        "name": "Old",
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "status": 200,
-      "body": {
-        "name": "New"
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L253:PATCH:/workspaces/:id",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "PATCH /:id",
-    "itTitle": "404s for a nonexistent id",
+    "routeId": "src/backend/database/routes/user-admin-routes.ts#L751:DELETE:/users/admin/:userId/second-factors",
+    "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
+    "describeTitle": "DELETE /admin/:userId/second-factors",
+    "itTitle": "lists factors with their availability",
     "request": {
       "params": {
-        "id": "999"
-      },
-      "body": {
-        "name": "New"
+        "userId": "target1"
       }
     },
     "response": {
-      "status": 404
+      "status": 200
     }
   },
   {
-    "routeId": "src/backend/database/routes/workspaces.ts#L326:PUT:/workspaces/:id/content",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "PUT /:id/content",
-    "itTitle": "updates payload for a manual workspace",
-    "request": {
-      "body": {
-        "name": "A",
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "status": 200,
-      "body": {
-        "tabCount": 1
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L326:PUT:/workspaces/:id/content",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "PUT /:id/content",
-    "itTitle": "404s on wrong owner",
-    "request": {
-      "body": {
-        "name": "A",
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L607:DELETE:/workspaces/:id",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "DELETE /:id",
-    "itTitle": "rejects deleting the last_session row",
-    "request": {
-      "body": {
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L607:DELETE:/workspaces/:id",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "DELETE /:id",
-    "itTitle": "404s for a nonexistent id",
+    "routeId": "src/backend/database/routes/user-admin-routes.ts#L751:DELETE:/users/admin/:userId/second-factors",
+    "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
+    "describeTitle": "DELETE /admin/:userId/second-factors",
+    "itTitle": "403s when the caller is not an admin",
     "request": {
       "params": {
-        "id": "999"
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L607:DELETE:/workspaces/:id",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "DELETE /:id",
-    "itTitle": "deletes a manual workspace",
-    "request": {
-      "body": {
-        "name": "A",
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "status": 200,
-      "body": {
-        "success": true
-      },
-      "partial": false
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L394:POST:/workspaces/:id/duplicate",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "POST /:id/duplicate",
-    "itTitle": "produces a second independent row",
-    "request": {
-      "body": {
-        "name": "A",
-        "payload": {
-          "version": 1,
-          "tabs": [
-            {
-              "slotId": "a"
-            }
-          ]
-        }
-      }
-    },
-    "response": {
-      "status": 200,
-      "body": {
-        "name": "A (copy)",
-        "tabCount": 1
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L454:POST:/workspaces/:id/set-default",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "POST /:id/set-default",
-    "itTitle": "clears a previous default and sets the new one",
-    "request": {
-      "body": {
-        "name": "A",
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "body": {
-        "isDefault": true
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L454:POST:/workspaces/:id/set-default",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "POST /:id/set-default",
-    "itTitle": "is idempotent when re-called on an already-default row",
-    "request": {
-      "body": {
-        "name": "A",
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "status": 200,
-      "body": {
-        "isDefault": true
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L505:POST:/workspaces/:id/unset-default",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "POST /:id/unset-default",
-    "itTitle": "clears isDefault on a manual workspace",
-    "request": {
-      "body": {
-        "name": "A",
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "status": 200,
-      "body": {
-        "isDefault": false
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L505:POST:/workspaces/:id/unset-default",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "POST /:id/unset-default",
-    "itTitle": "rejects unsetting the last_session row",
-    "request": {
-      "body": {
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L556:POST:/workspaces/:id/apply",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "POST /:id/apply",
-    "itTitle": "touches lastUsedAt and returns the parsed payload",
-    "request": {
-      "body": {
-        "name": "A",
-        "payload": {
-          "version": 1,
-          "tabs": [
-            {
-              "slotId": "a"
-            }
-          ]
-        }
-      }
-    },
-    "response": {
-      "status": 200,
-      "body": {
-        "payload": {
-          "version": 1,
-          "tabs": [
-            {
-              "slotId": "a"
-            }
-          ]
-        }
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/database/routes/workspaces.ts#L201:PUT:/workspaces/last-session",
-    "testFile": "src/backend/tests/database/routes/workspaces.test.ts",
-    "describeTitle": "PUT /last-session",
-    "itTitle": "upserts idempotently - two calls produce one row",
-    "request": {
-      "body": {
-        "payload": {
-          "version": 1,
-          "tabs": []
-        }
-      }
-    },
-    "response": {
-      "body": {
-        "tabCount": 1
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L118:POST:/session-sharing/create",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "POST /session-sharing/create",
-    "itTitle": "rejects a caller who does not own the live session",
-    "request": {
-      "body": {
-        "hostId": 1,
-        "sessionId": "session-1",
-        "protocol": "ssh",
-        "shareType": "link",
-        "permissionLevel": "read-only"
-      }
-    },
-    "response": {
-      "status": 403,
-      "body": {
-        "error": "You do not own this live session"
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L118:POST:/session-sharing/create",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "POST /session-sharing/create",
-    "itTitle": "creates a link share for the session owner",
-    "request": {
-      "body": {
-        "hostId": 1,
-        "sessionId": "session-1",
-        "protocol": "ssh",
-        "shareType": "link",
-        "permissionLevel": "read-only"
-      }
-    },
-    "response": {
-      "status": 200,
-      "body": {
-        "shareId": "<expr>"
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L118:POST:/session-sharing/create",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "POST /session-sharing/create",
-    "itTitle": "rejects a user share when the target lacks host access",
-    "request": {
-      "body": {
-        "hostId": 1,
-        "sessionId": "session-1",
-        "protocol": "ssh",
-        "shareType": "user",
-        "targetUserId": "no-access-user",
-        "permissionLevel": "read-write"
-      }
-    },
-    "response": {
-      "status": 403,
-      "body": {
-        "error": "Target user does not have access to this host"
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L118:POST:/session-sharing/create",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "POST /session-sharing/create",
-    "itTitle": "global kill switch overrides an enabled per-host toggle",
-    "request": {
-      "body": {
-        "hostId": 1,
-        "sessionId": "session-1",
-        "protocol": "ssh",
-        "shareType": "link",
-        "permissionLevel": "read-only"
-      }
-    },
-    "response": {
-      "status": 403,
-      "body": {
-        "error": "Session sharing is disabled for this host"
-      },
-      "partial": true
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L118:POST:/session-sharing/create",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "POST /session-sharing/create",
-    "itTitle": "rejects when the per-host toggle is off even though global is on",
-    "request": {
-      "body": {
-        "hostId": 2,
-        "sessionId": "session-1",
-        "protocol": "ssh",
-        "shareType": "link",
-        "permissionLevel": "read-only"
+        "userId": "locked1"
       }
     },
     "response": {
@@ -1409,164 +377,17 @@
     }
   },
   {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L366:GET:/session-sharing/resolve/:linkToken",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "GET /session-sharing/resolve/:linkToken",
-    "itTitle": "never includes hostname, ip, username, or hostId in the response body",
+    "routeId": "src/backend/database/routes/user-admin-routes.ts#L751:DELETE:/users/admin/:userId/second-factors",
+    "testFile": "src/backend/tests/database/routes/user-admin-routes.test.ts",
+    "describeTitle": "DELETE /admin/:userId/second-factors",
+    "itTitle": "404s for an unknown target",
     "request": {
       "params": {
-        "linkToken": "<expr>"
-      }
-    },
-    "response": {
-      "status": 200
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L366:GET:/session-sharing/resolve/:linkToken",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "GET /session-sharing/resolve/:linkToken",
-    "itTitle": "returns only protocol/permissionLevel/wsPath(/connectParams) for ssh",
-    "request": {
-      "params": {
-        "linkToken": "<expr>"
-      }
-    },
-    "response": {
-      "body": {
-        "protocol": "ssh",
-        "permissionLevel": "read-only",
-        "wsPath": "<expr>"
-      },
-      "partial": false
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L366:GET:/session-sharing/resolve/:linkToken",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "GET /session-sharing/resolve/:linkToken",
-    "itTitle": "mints a fresh join token for guac protocols",
-    "request": {
-      "body": {
-        "hostId": 1,
-        "sessionId": "guac-conn-1",
-        "protocol": "vnc",
-        "shareType": "link",
-        "permissionLevel": "read-only"
-      }
-    },
-    "response": {
-      "status": 200
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L366:GET:/session-sharing/resolve/:linkToken",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "GET /session-sharing/resolve/:linkToken",
-    "itTitle": "rejects an unknown link token",
-    "request": {
-      "params": {
-        "linkToken": "does-not-exist"
+        "userId": "ghost"
       }
     },
     "response": {
       "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L366:GET:/session-sharing/resolve/:linkToken",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "GET /session-sharing/resolve/:linkToken",
-    "itTitle": "rejects a revoked link token",
-    "request": {
-      "params": {
-        "shareId": "<expr>"
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L366:GET:/session-sharing/resolve/:linkToken",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "GET /session-sharing/resolve/:linkToken",
-    "itTitle": "rejects an expired link token",
-    "request": {
-      "params": {
-        "linkToken": "expired-token"
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L366:GET:/session-sharing/resolve/:linkToken",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "GET /session-sharing/resolve/:linkToken",
-    "itTitle": "re-checks the global kill switch at resolve time, not just at creation time",
-    "request": {
-      "params": {
-        "linkToken": "<expr>"
-      }
-    },
-    "response": {
-      "status": 404
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L290:DELETE:/session-sharing/:shareId",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "DELETE /session-sharing/:shareId",
-    "itTitle": "allows the owner to revoke their own share",
-    "request": {
-      "body": {
-        "hostId": 1,
-        "sessionId": "session-1",
-        "protocol": "ssh",
-        "shareType": "link",
-        "permissionLevel": "read-only"
-      }
-    },
-    "response": {
-      "status": 200
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L290:DELETE:/session-sharing/:shareId",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "DELETE /session-sharing/:shareId",
-    "itTitle": "rejects a non-owner, non-admin caller",
-    "request": {
-      "body": {
-        "hostId": 1,
-        "sessionId": "session-1",
-        "protocol": "ssh",
-        "shareType": "link",
-        "permissionLevel": "read-only"
-      }
-    },
-    "response": {
-      "status": 403
-    }
-  },
-  {
-    "routeId": "src/backend/hosts/session-sharing/routes.ts#L290:DELETE:/session-sharing/:shareId",
-    "testFile": "src/backend/tests/hosts/session-sharing/routes.test.ts",
-    "describeTitle": "DELETE /session-sharing/:shareId",
-    "itTitle": "allows an admin to revoke someone else's share",
-    "request": {
-      "body": {
-        "hostId": 1,
-        "sessionId": "session-1",
-        "protocol": "ssh",
-        "shareType": "link",
-        "permissionLevel": "read-only"
-      }
-    },
-    "response": {
-      "status": 200
     }
   }
 ]

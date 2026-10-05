@@ -5,7 +5,7 @@
       "dbTableName": "users",
       "schemaName": "UserRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 13,
+      "line": 12,
       "columns": [
         {
           "tsName": "id",
@@ -155,37 +155,6 @@
           "unique": false
         },
         {
-          "tsName": "totpSecret",
-          "dbName": "totp_secret",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "totpEnabled",
-          "dbName": "totp_enabled",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "totpBackupCodes",
-          "dbName": "totp_backup_codes",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
           "tsName": "registeredAt",
           "dbName": "registered_at",
           "jsonType": "string",
@@ -218,7 +187,7 @@
       "dbTableName": "settings",
       "schemaName": "SettingsRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 45,
+      "line": 38,
       "columns": [
         {
           "tsName": "key",
@@ -241,108 +210,11 @@
       ]
     },
     {
-      "tsVarName": "ssoProviders",
-      "dbTableName": "sso_providers",
-      "schemaName": "SsoProviderRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 50,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "type",
-          "dbName": "type",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enabled",
-          "dbName": "enabled",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": true
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "displayOrder",
-          "dbName": "display_order",
-          "jsonType": "integer",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": 0
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "config",
-          "dbName": "config",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
       "tsVarName": "sessions",
       "dbTableName": "sessions",
       "schemaName": "SessionRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 65,
+      "line": 43,
       "columns": [
         {
           "tsName": "id",
@@ -459,7 +331,7 @@
       "dbTableName": "trusted_devices",
       "schemaName": "TrustedDeviceRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 93,
+      "line": 71,
       "columns": [
         {
           "tsName": "id",
@@ -545,19 +417,19 @@
       ]
     },
     {
-      "tsVarName": "webauthnCredentials",
-      "dbTableName": "webauthn_credentials",
-      "schemaName": "WebauthnCredentialRecord",
+      "tsVarName": "userExternalIdentities",
+      "dbTableName": "user_external_identities",
+      "schemaName": "UserExternalIdentityRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 114,
+      "line": 96,
       "columns": [
         {
           "tsName": "id",
           "dbName": "id",
-          "jsonType": "string",
+          "jsonType": "integer",
           "nullable": false,
           "primaryKey": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "unique": false
         },
         {
@@ -571,8 +443,8 @@
           "references": "users.id"
         },
         {
-          "tsName": "name",
-          "dbName": "name",
+          "tsName": "providerId",
+          "dbName": "provider_id",
           "jsonType": "string",
           "nullable": false,
           "primaryKey": false,
@@ -580,8 +452,8 @@
           "unique": false
         },
         {
-          "tsName": "credentialId",
-          "dbName": "credential_id",
+          "tsName": "subject",
+          "dbName": "subject",
           "jsonType": "string",
           "nullable": false,
           "primaryKey": false,
@@ -589,67 +461,10 @@
           "unique": false
         },
         {
-          "tsName": "publicKey",
-          "dbName": "public_key",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "counter",
-          "dbName": "counter",
-          "jsonType": "integer",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": 0
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "deviceType",
-          "dbName": "device_type",
+          "tsName": "email",
+          "dbName": "email",
           "jsonType": "string",
           "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "backedUp",
-          "dbName": "backed_up",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "transports",
-          "dbName": "transports",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "userVerification",
-          "dbName": "user_verification",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "preferred"
-          },
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
@@ -666,12 +481,62 @@
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
+        }
+      ]
+    },
+    {
+      "tsVarName": "userSecondFactors",
+      "dbTableName": "user_second_factors",
+      "schemaName": "UserSecondFactorRecord",
+      "file": "src/backend/database/db/schema.ts",
+      "line": 124,
+      "columns": [
+        {
+          "tsName": "id",
+          "dbName": "id",
+          "jsonType": "integer",
+          "nullable": false,
+          "primaryKey": true,
+          "autoIncrement": true,
+          "unique": false
         },
         {
-          "tsName": "lastUsedAt",
-          "dbName": "last_used_at",
+          "tsName": "userId",
+          "dbName": "user_id",
           "jsonType": "string",
-          "nullable": true,
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false,
+          "references": "users.id"
+        },
+        {
+          "tsName": "pluginId",
+          "dbName": "plugin_id",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "factorId",
+          "dbName": "factor_id",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "enrolledAt",
+          "dbName": "enrolled_at",
+          "jsonType": "string",
+          "nullable": false,
+          "default": {
+            "kind": "expression",
+            "text": "sql`CURRENT_TIMESTAMP`"
+          },
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
@@ -681,9 +546,9 @@
     {
       "tsVarName": "hosts",
       "dbTableName": "ssh_data",
-      "schemaName": "HostRecord",
+      "schemaName": "HostRow",
       "file": "src/backend/database/db/schema.ts",
-      "line": 133,
+      "line": 146,
       "columns": [
         {
           "tsName": "id",
@@ -813,19 +678,6 @@
           "unique": false
         },
         {
-          "tsName": "useWarpgate",
-          "dbName": "use_warpgate",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
           "tsName": "shareSshAuth",
           "dbName": "share_ssh_auth",
           "jsonType": "boolean",
@@ -894,34 +746,6 @@
           "unique": false
         },
         {
-          "tsName": "autostartPassword",
-          "dbName": "autostart_password",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "autostartKey",
-          "dbName": "autostart_key",
-          "jsonType": "string",
-          "maxLength": 8192,
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "autostartKeyPassword",
-          "dbName": "autostart_key_password",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
           "tsName": "credentialId",
           "dbName": "credential_id",
           "jsonType": "integer",
@@ -941,90 +765,6 @@
           "unique": false
         },
         {
-          "tsName": "vaultProfileId",
-          "dbName": "vault_profile_id",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "vaultProfiles.id"
-        },
-        {
-          "tsName": "enableTerminal",
-          "dbName": "enable_terminal",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": true
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enableSessionLogging",
-          "dbName": "enable_session_logging",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": true
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "allowSessionSharing",
-          "dbName": "allow_session_sharing",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": true
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enableCommandHistory",
-          "dbName": "enable_command_history",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": true
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enableTunnel",
-          "dbName": "enable_tunnel",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": true
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "tunnelConnections",
-          "dbName": "tunnel_connections",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
           "tsName": "jumpHosts",
           "dbName": "jump_hosts",
           "jsonType": "string",
@@ -1034,8 +774,8 @@
           "unique": false
         },
         {
-          "tsName": "enableFileManager",
-          "dbName": "enable_file_manager",
+          "tsName": "statusCheckEnabled",
+          "dbName": "status_check_enabled",
           "jsonType": "boolean",
           "nullable": false,
           "default": {
@@ -1047,223 +787,9 @@
           "unique": false
         },
         {
-          "tsName": "scpLegacy",
-          "dbName": "scp_legacy",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enableDocker",
-          "dbName": "enable_docker",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enableWebUi",
-          "dbName": "enable_web_ui",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enableTmuxMonitor",
-          "dbName": "enable_tmux_monitor",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enableTerminalToolbar",
-          "dbName": "enable_terminal_toolbar",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": true
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enableAiAssistant",
-          "dbName": "enable_ai_assistant",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "showTerminalInSidebar",
-          "dbName": "show_terminal_in_sidebar",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": true
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "showFileManagerInSidebar",
-          "dbName": "show_file_manager_in_sidebar",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "showTunnelInSidebar",
-          "dbName": "show_tunnel_in_sidebar",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "showDockerInSidebar",
-          "dbName": "show_docker_in_sidebar",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "showServerStatsInSidebar",
-          "dbName": "show_server_stats_in_sidebar",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "defaultPath",
-          "dbName": "default_path",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "statsConfig",
-          "dbName": "stats_config",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "dockerConfig",
-          "dbName": "docker_config",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "webUiConfig",
-          "dbName": "web_ui_config",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enableProxmox",
-          "dbName": "enable_proxmox",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "proxmoxConfig",
-          "dbName": "proxmox_config",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enableProxmoxStats",
-          "dbName": "enable_proxmox_stats",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "proxmoxStatsConfig",
-          "dbName": "proxmox_stats_config",
-          "jsonType": "string",
+          "tsName": "statusCheckInterval",
+          "dbName": "status_check_interval",
+          "jsonType": "integer",
           "nullable": true,
           "primaryKey": false,
           "autoIncrement": false,
@@ -1272,6 +798,15 @@
         {
           "tsName": "terminalConfig",
           "dbName": "terminal_config",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "sshOptions",
+          "dbName": "ssh_options",
           "jsonType": "string",
           "nullable": true,
           "primaryKey": false,
@@ -1310,45 +845,6 @@
           "unique": false
         },
         {
-          "tsName": "enableRdp",
-          "dbName": "enable_rdp",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enableVnc",
-          "dbName": "enable_vnc",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enableTelnet",
-          "dbName": "enable_telnet",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
           "tsName": "sshPort",
           "dbName": "ssh_port",
           "jsonType": "integer",
@@ -1357,227 +853,6 @@
             "kind": "literal",
             "value": 22
           },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "rdpPort",
-          "dbName": "rdp_port",
-          "jsonType": "integer",
-          "nullable": true,
-          "default": {
-            "kind": "literal",
-            "value": 3389
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "vncPort",
-          "dbName": "vnc_port",
-          "jsonType": "integer",
-          "nullable": true,
-          "default": {
-            "kind": "literal",
-            "value": 5900
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "telnetPort",
-          "dbName": "telnet_port",
-          "jsonType": "integer",
-          "nullable": true,
-          "default": {
-            "kind": "literal",
-            "value": 23
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "rdpCredentialId",
-          "dbName": "rdp_credential_id",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "sshCredentials.id"
-        },
-        {
-          "tsName": "rdpUser",
-          "dbName": "rdp_user",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "rdpPassword",
-          "dbName": "rdp_password",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "rdpDomain",
-          "dbName": "rdp_domain",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "rdpSecurity",
-          "dbName": "rdp_security",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "rdpIgnoreCert",
-          "dbName": "rdp_ignore_cert",
-          "jsonType": "boolean",
-          "nullable": true,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "vncCredentialId",
-          "dbName": "vnc_credential_id",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "sshCredentials.id"
-        },
-        {
-          "tsName": "vncPassword",
-          "dbName": "vnc_password",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "vncUser",
-          "dbName": "vnc_user",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "telnetUser",
-          "dbName": "telnet_user",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "telnetPassword",
-          "dbName": "telnet_password",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "telnetCredentialId",
-          "dbName": "telnet_credential_id",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "sshCredentials.id"
-        },
-        {
-          "tsName": "rdpAuthType",
-          "dbName": "rdp_auth_type",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "vncAuthType",
-          "dbName": "vnc_auth_type",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "telnetAuthType",
-          "dbName": "telnet_auth_type",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "domain",
-          "dbName": "domain",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "security",
-          "dbName": "security",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "ignoreCert",
-          "dbName": "ignore_cert",
-          "jsonType": "boolean",
-          "nullable": true,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "guacamoleConfig",
-          "dbName": "guacamole_config",
-          "jsonType": "string",
-          "nullable": true,
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
@@ -1639,24 +914,6 @@
         {
           "tsName": "connectionOrigin",
           "dbName": "connection_origin",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "macAddress",
-          "dbName": "mac_address",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "wolBroadcastAddress",
-          "dbName": "wol_broadcast_address",
           "jsonType": "string",
           "nullable": true,
           "primaryKey": false,
@@ -1744,6 +1001,37 @@
           "unique": true
         },
         {
+          "tsName": "localOnly",
+          "dbName": "local_only",
+          "jsonType": "boolean",
+          "nullable": false,
+          "default": {
+            "kind": "literal",
+            "value": false
+          },
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "sharedSource",
+          "dbName": "shared_source",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "defaultOverrides",
+          "dbName": "default_overrides",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
           "tsName": "createdAt",
           "dbName": "created_at",
           "jsonType": "string",
@@ -1772,347 +1060,11 @@
       ]
     },
     {
-      "tsVarName": "fileManagerRecent",
-      "dbTableName": "file_manager_recent",
-      "schemaName": "FileManagerRecentRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 333,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "path",
-          "dbName": "path",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "lastOpened",
-          "dbName": "last_opened",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "fileManagerPinned",
-      "dbTableName": "file_manager_pinned",
-      "schemaName": "FileManagerPinnedRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 355,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "path",
-          "dbName": "path",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "pinnedAt",
-          "dbName": "pinned_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "fileManagerShortcuts",
-      "dbTableName": "file_manager_shortcuts",
-      "schemaName": "FileManagerShortcutRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 376,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "path",
-          "dbName": "path",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "transferRecent",
-      "dbTableName": "transfer_recent",
-      "schemaName": "TransferRecentRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 397,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "sourceHostId",
-          "dbName": "source_host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "destHostId",
-          "dbName": "dest_host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "destPath",
-          "dbName": "dest_path",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "destPathLabel",
-          "dbName": "dest_path_label",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "lastUsed",
-          "dbName": "last_used",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "dismissedAlerts",
-      "dbTableName": "dismissed_alerts",
-      "schemaName": "DismissedAlertRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 419,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "alertId",
-          "dbName": "alert_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "dismissedAt",
-          "dbName": "dismissed_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
       "tsVarName": "sshCredentials",
       "dbTableName": "ssh_credentials",
       "schemaName": "CredentialRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 434,
+      "line": 258,
       "columns": [
         {
           "tsName": "id",
@@ -2317,6 +1269,15 @@
           "unique": true
         },
         {
+          "tsName": "sharedSource",
+          "dbName": "shared_source",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
           "tsName": "createdAt",
           "dbName": "created_at",
           "jsonType": "string",
@@ -2349,7 +1310,7 @@
       "dbTableName": "ssh_credential_usage",
       "schemaName": "SshCredentialUsageRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 476,
+      "line": 300,
       "columns": [
         {
           "tsName": "id",
@@ -2406,11 +1367,11 @@
       ]
     },
     {
-      "tsVarName": "snippets",
-      "dbTableName": "snippets",
-      "schemaName": "SnippetRecord",
+      "tsVarName": "hostProtocolAuth",
+      "dbTableName": "host_protocol_auth",
+      "schemaName": "HostProtocolAuthRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 499,
+      "line": 326,
       "columns": [
         {
           "tsName": "id",
@@ -2420,6 +1381,16 @@
           "primaryKey": true,
           "autoIncrement": true,
           "unique": false
+        },
+        {
+          "tsName": "hostId",
+          "dbName": "host_id",
+          "jsonType": "integer",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false,
+          "references": "hosts.id"
         },
         {
           "tsName": "userId",
@@ -2432,8 +1403,8 @@
           "references": "users.id"
         },
         {
-          "tsName": "name",
-          "dbName": "name",
+          "tsName": "protocol",
+          "dbName": "protocol",
           "jsonType": "string",
           "nullable": false,
           "primaryKey": false,
@@ -2441,142 +1412,31 @@
           "unique": false
         },
         {
-          "tsName": "content",
-          "dbName": "content",
+          "tsName": "authType",
+          "dbName": "auth_type",
           "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "description",
-          "dbName": "description",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "folder",
-          "dbName": "folder",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "order",
-          "dbName": "order",
-          "jsonType": "integer",
           "nullable": false,
           "default": {
             "kind": "literal",
-            "value": 0
+            "value": "direct"
           },
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
         },
         {
-          "tsName": "syncId",
-          "dbName": "sync_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": true
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "hostFilter",
-          "dbName": "host_filter",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "isNote",
-          "dbName": "is_note",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "snippetFolders",
-      "dbTableName": "snippet_folders",
-      "schemaName": "SnippetFolderRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 524,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
+          "tsName": "credentialId",
+          "dbName": "credential_id",
           "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
+          "nullable": true,
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false,
-          "references": "users.id"
+          "references": "sshCredentials.id"
         },
         {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "color",
-          "dbName": "color",
+          "tsName": "username",
+          "dbName": "username",
           "jsonType": "string",
           "nullable": true,
           "primaryKey": false,
@@ -2584,8 +1444,8 @@
           "unique": false
         },
         {
-          "tsName": "icon",
-          "dbName": "icon",
+          "tsName": "password",
+          "dbName": "password",
           "jsonType": "string",
           "nullable": true,
           "primaryKey": false,
@@ -2593,89 +1453,8 @@
           "unique": false
         },
         {
-          "tsName": "syncId",
-          "dbName": "sync_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": true
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "c2sTunnelPresets",
-      "dbTableName": "c2s_tunnel_presets",
-      "schemaName": "C2sTunnelPresetRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 541,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "config",
-          "dbName": "config",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "platform",
-          "dbName": "platform",
+          "tsName": "fields",
+          "dbName": "fields",
           "jsonType": "string",
           "nullable": true,
           "primaryKey": false,
@@ -2683,8 +1462,8 @@
           "unique": false
         },
         {
-          "tsName": "computerName",
-          "dbName": "computer_name",
+          "tsName": "secretFields",
+          "dbName": "secret_fields",
           "jsonType": "string",
           "nullable": true,
           "primaryKey": false,
@@ -2707,99 +1486,6 @@
         {
           "tsName": "updatedAt",
           "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "snippetAccess",
-      "dbTableName": "snippet_access",
-      "schemaName": "SnippetAccessRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 558,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "snippetId",
-          "dbName": "snippet_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "snippets.id"
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "roleId",
-          "dbName": "role_id",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "roles.id"
-        },
-        {
-          "tsName": "grantedBy",
-          "dbName": "granted_by",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "permissionLevel",
-          "dbName": "permission_level",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "view"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "expiresAt",
-          "dbName": "expires_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
           "jsonType": "string",
           "nullable": false,
           "default": {
@@ -2817,7 +1503,7 @@
       "dbTableName": "ssh_folders",
       "schemaName": "HostFolderRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 591,
+      "line": 362,
       "columns": [
         {
           "tsName": "id",
@@ -2894,6 +1580,19 @@
           "unique": true
         },
         {
+          "tsName": "localOnly",
+          "dbName": "local_only",
+          "jsonType": "boolean",
+          "nullable": false,
+          "default": {
+            "kind": "literal",
+            "value": false
+          },
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
           "tsName": "createdAt",
           "dbName": "created_at",
           "jsonType": "string",
@@ -2922,11 +1621,116 @@
       ]
     },
     {
+      "tsVarName": "hostDefaults",
+      "dbTableName": "host_defaults",
+      "schemaName": "HostDefaultsRecord",
+      "file": "src/backend/database/db/schema.ts",
+      "line": 396,
+      "columns": [
+        {
+          "tsName": "id",
+          "dbName": "id",
+          "jsonType": "integer",
+          "nullable": false,
+          "primaryKey": true,
+          "autoIncrement": true,
+          "unique": false
+        },
+        {
+          "tsName": "level",
+          "dbName": "level",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "scopeKey",
+          "dbName": "scope_key",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "userId",
+          "dbName": "user_id",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false,
+          "references": "users.id"
+        },
+        {
+          "tsName": "folderId",
+          "dbName": "folder_id",
+          "jsonType": "integer",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false,
+          "references": "sshFolders.id"
+        },
+        {
+          "tsName": "namespace",
+          "dbName": "namespace",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "key",
+          "dbName": "key",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "value",
+          "dbName": "value",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "updatedBy",
+          "dbName": "updated_by",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "updatedAt",
+          "dbName": "updated_at",
+          "jsonType": "string",
+          "nullable": false,
+          "default": {
+            "kind": "expression",
+            "text": "sql`CURRENT_TIMESTAMP`"
+          },
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        }
+      ]
+    },
+    {
       "tsVarName": "recentActivity",
       "dbTableName": "recent_activity",
       "schemaName": "RecentActivityRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 618,
+      "line": 425,
       "columns": [
         {
           "tsName": "id",
@@ -2991,134 +1795,11 @@
       ]
     },
     {
-      "tsVarName": "commandHistory",
-      "dbTableName": "command_history",
-      "schemaName": "CommandHistoryRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 640,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "command",
-          "dbName": "command",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "executedAt",
-          "dbName": "executed_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "networkTopology",
-      "dbTableName": "network_topology",
-      "schemaName": "NetworkTopologyRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 660,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "topology",
-          "dbName": "topology",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
       "tsVarName": "hostAccess",
       "dbTableName": "host_access",
       "schemaName": "HostAccessRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 674,
+      "line": 447,
       "columns": [
         {
           "tsName": "id",
@@ -3233,7 +1914,7 @@
       "dbTableName": "shared_host_auth_overrides",
       "schemaName": "SharedHostAuthOverrideRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 713,
+      "line": 486,
       "columns": [
         {
           "tsName": "id",
@@ -3320,7 +2001,7 @@
       "dbTableName": "shared_host_secrets",
       "schemaName": "SharedHostSecretRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 743,
+      "line": 516,
       "columns": [
         {
           "tsName": "id",
@@ -3452,6 +2133,15 @@
           "unique": false
         },
         {
+          "tsName": "encryptedFields",
+          "dbName": "encrypted_fields",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
           "tsName": "createdAt",
           "dbName": "created_at",
           "jsonType": "string",
@@ -3484,7 +2174,7 @@
       "dbTableName": "roles",
       "schemaName": "RoleRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 791,
+      "line": 566,
       "columns": [
         {
           "tsName": "id",
@@ -3577,7 +2267,7 @@
       "dbTableName": "user_roles",
       "schemaName": "UserRolesRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 811,
+      "line": 586,
       "columns": [
         {
           "tsName": "id",
@@ -3638,7 +2328,7 @@
       "dbTableName": "audit_logs",
       "schemaName": "AuditLogRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 841,
+      "line": 616,
       "columns": [
         {
           "tsName": "id",
@@ -3765,800 +2455,11 @@
       ]
     },
     {
-      "tsVarName": "sessionRecordings",
-      "dbTableName": "session_recordings",
-      "schemaName": "SessionRecordingRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 878,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "username",
-          "dbName": "username",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "accessId",
-          "dbName": "access_id",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hostAccess.id"
-        },
-        {
-          "tsName": "startedAt",
-          "dbName": "started_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "endedAt",
-          "dbName": "ended_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "duration",
-          "dbName": "duration",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "commands",
-          "dbName": "commands",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "dangerousActions",
-          "dbName": "dangerous_actions",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "recordingPath",
-          "dbName": "recording_path",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "protocol",
-          "dbName": "protocol",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "ssh"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "format",
-          "dbName": "format",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "text"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "terminatedByOwner",
-          "dbName": "terminated_by_owner",
-          "jsonType": "boolean",
-          "nullable": true,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "terminationReason",
-          "dbName": "termination_reason",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "sessionShares",
-      "dbTableName": "session_shares",
-      "schemaName": "SessionShareRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 922,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "ownerUserId",
-          "dbName": "owner_user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "protocol",
-          "dbName": "protocol",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "sessionId",
-          "dbName": "session_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "tabInstanceId",
-          "dbName": "tab_instance_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "shareType",
-          "dbName": "share_type",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "targetUserId",
-          "dbName": "target_user_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "linkToken",
-          "dbName": "link_token",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": true
-        },
-        {
-          "tsName": "permissionLevel",
-          "dbName": "permission_level",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "read-only"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "expiresAt",
-          "dbName": "expires_at",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "revokedAt",
-          "dbName": "revoked_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "lastJoinedAt",
-          "dbName": "last_joined_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "joinCount",
-          "dbName": "join_count",
-          "jsonType": "integer",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": 0
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "sessionShareParticipants",
-      "dbTableName": "session_share_participants",
-      "schemaName": "SessionShareParticipantRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 966,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "shareId",
-          "dbName": "share_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "sessionShares.id"
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "guestLabel",
-          "dbName": "guest_label",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "joinedAt",
-          "dbName": "joined_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "leftAt",
-          "dbName": "left_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "opksshTokens",
-      "dbTableName": "opkssh_tokens",
-      "schemaName": "OpksshTokenRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 986,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "sshCert",
-          "dbName": "ssh_cert",
-          "jsonType": "string",
-          "maxLength": 8192,
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "privateKey",
-          "dbName": "private_key",
-          "jsonType": "string",
-          "maxLength": 8192,
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "email",
-          "dbName": "email",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "sub",
-          "dbName": "sub",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "issuer",
-          "dbName": "issuer",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "audience",
-          "dbName": "audience",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "expiresAt",
-          "dbName": "expires_at",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "lastUsed",
-          "dbName": "last_used",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "vaultProfiles",
-      "dbTableName": "vault_profiles",
-      "schemaName": "VaultProfileRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1021,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "description",
-          "dbName": "description",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "folder",
-          "dbName": "folder",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "tags",
-          "dbName": "tags",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "vaultAddr",
-          "dbName": "vault_addr",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "vaultNamespace",
-          "dbName": "vault_namespace",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "oidcMount",
-          "dbName": "oidc_mount",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "oidcRole",
-          "dbName": "oidc_role",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "sshMount",
-          "dbName": "ssh_mount",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "sshRole",
-          "dbName": "ssh_role",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "validPrincipals",
-          "dbName": "valid_principals",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "keyType",
-          "dbName": "key_type",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "shared",
-          "dbName": "shared",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "syncId",
-          "dbName": "sync_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": true
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "vaultTokens",
-      "dbTableName": "vault_tokens",
-      "schemaName": "VaultTokenRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1056,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "profileId",
-          "dbName": "profile_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "vaultProfiles.id"
-        },
-        {
-          "tsName": "sshCert",
-          "dbName": "ssh_cert",
-          "jsonType": "string",
-          "maxLength": 8192,
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "privateKey",
-          "dbName": "private_key",
-          "jsonType": "string",
-          "maxLength": 8192,
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "expiresAt",
-          "dbName": "expires_at",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "lastUsed",
-          "dbName": "last_used",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
       "tsVarName": "apiKeys",
       "dbTableName": "api_keys",
       "schemaName": "ApiKeyRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 1082,
+      "line": 653,
       "columns": [
         {
           "tsName": "id",
@@ -4657,7 +2558,7 @@
       "dbTableName": "user_open_tabs",
       "schemaName": "OpenTabRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 1100,
+      "line": 671,
       "columns": [
         {
           "tsName": "id",
@@ -4761,7 +2662,7 @@
       "dbTableName": "user_preferences",
       "schemaName": "UserPreferenceRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 1124,
+      "line": 695,
       "columns": [
         {
           "tsName": "userId",
@@ -4940,24 +2841,6 @@
           "unique": false
         },
         {
-          "tsName": "aiAssistantEnabled",
-          "dbName": "ai_assistant_enabled",
-          "jsonType": "boolean",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "aiReadOnlyCommands",
-          "dbName": "ai_read_only_commands",
-          "jsonType": "boolean",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
           "tsName": "compactHostView",
           "dbName": "compact_host_view",
           "jsonType": "boolean",
@@ -5003,15 +2886,6 @@
           "unique": false
         },
         {
-          "tsName": "rdpDefaults",
-          "dbName": "rdp_defaults",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
           "tsName": "terminalMacros",
           "dbName": "terminal_macros",
           "jsonType": "string",
@@ -5036,157 +2910,11 @@
       ]
     },
     {
-      "tsVarName": "hostMetricsPreferences",
-      "dbTableName": "host_metrics_preferences",
-      "schemaName": "HostMetricsPreferenceRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1170,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "layout",
-          "dbName": "layout",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "proxmoxStatsPreferences",
-      "dbTableName": "proxmox_stats_preferences",
-      "schemaName": "ProxmoxStatsPreferencesRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1198,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "layout",
-          "dbName": "layout",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
       "tsVarName": "hostSidebarPreferences",
       "dbTableName": "host_sidebar_preferences",
       "schemaName": "HostSidebarPreferenceRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 1219,
+      "line": 734,
       "columns": [
         {
           "tsName": "userId",
@@ -5227,7 +2955,7 @@
       "dbTableName": "credential_sidebar_preferences",
       "schemaName": "CredentialSidebarPreferenceRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 1231,
+      "line": 746,
       "columns": [
         {
           "tsName": "userId",
@@ -5268,7 +2996,7 @@
       "dbTableName": "ui_preferences",
       "schemaName": "UiPreferenceRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 1246,
+      "line": 761,
       "columns": [
         {
           "tsName": "userId",
@@ -5305,2361 +3033,11 @@
       ]
     },
     {
-      "tsVarName": "hostHealthChecks",
-      "dbTableName": "host_health_checks",
-      "schemaName": "HostHealthCheckRecord",
+      "tsVarName": "syncRecords",
+      "dbTableName": "sync_records",
+      "schemaName": "SyncRecordsRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 1259,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "checks",
-          "dbName": "checks",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "intervalSeconds",
-          "dbName": "interval_seconds",
-          "jsonType": "integer",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": 300
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "hostHealthHistory",
-      "dbTableName": "host_health_history",
-      "schemaName": "HostHealthHistoryRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1285,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "checkId",
-          "dbName": "check_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "ts",
-          "dbName": "ts",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "ok",
-          "dbName": "ok",
-          "jsonType": "boolean",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "latencyMs",
-          "dbName": "latency_ms",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "detail",
-          "dbName": "detail",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "dashboardServiceLinks",
-      "dbTableName": "dashboard_service_links",
-      "schemaName": "DashboardServiceLinkRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1300,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "label",
-          "dbName": "label",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "url",
-          "dbName": "url",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "order",
-          "dbName": "order",
-          "jsonType": "integer",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": 0
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "syncId",
-          "dbName": "sync_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": true
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "termixIdentities",
-      "dbTableName": "termix_identities",
-      "schemaName": "TermixIdentityRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1321,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": true,
-          "references": "users.id"
-        },
-        {
-          "tsName": "handle",
-          "dbName": "handle",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": true
-        },
-        {
-          "tsName": "description",
-          "dbName": "description",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "termixIdentityKeys",
-      "dbTableName": "termix_identity_keys",
-      "schemaName": "TermixIdentityKeyRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1338,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "identityId",
-          "dbName": "identity_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "termixIdentities.id"
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "publicKey",
-          "dbName": "public_key",
-          "jsonType": "string",
-          "maxLength": 8192,
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "keyType",
-          "dbName": "key_type",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "algorithm",
-          "dbName": "algorithm",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "label",
-          "dbName": "label",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "comment",
-          "dbName": "comment",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "source",
-          "dbName": "source",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "manual"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "credentialId",
-          "dbName": "credential_id",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "sshCredentials.id"
-        },
-        {
-          "tsName": "enabled",
-          "dbName": "enabled",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": true
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "termixIdentityCa",
-      "dbTableName": "termix_identity_ca",
-      "schemaName": "TermixIdentityCaRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1368,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "identityId",
-          "dbName": "identity_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": true,
-          "references": "termixIdentities.id"
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "publicKey",
-          "dbName": "public_key",
-          "jsonType": "string",
-          "maxLength": 4096,
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "privateKey",
-          "dbName": "private_key",
-          "jsonType": "string",
-          "maxLength": 8192,
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "validityDays",
-          "dbName": "validity_days",
-          "jsonType": "integer",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": 90
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "tmuxSessionTags",
-      "dbTableName": "tmux_session_tags",
-      "schemaName": "TmuxSessionTagRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1391,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "sessionName",
-          "dbName": "session_name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "tag",
-          "dbName": "tag",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "hostMetricsHistory",
-      "dbTableName": "host_metrics_history",
-      "schemaName": "HostMetricsHistoryRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1408,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "ts",
-          "dbName": "ts",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "cpuPercent",
-          "dbName": "cpu_percent",
-          "jsonType": "number",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "memPercent",
-          "dbName": "mem_percent",
-          "jsonType": "number",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "diskPercent",
-          "dbName": "disk_percent",
-          "jsonType": "number",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "netRxBytes",
-          "dbName": "net_rx_bytes",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "netTxBytes",
-          "dbName": "net_tx_bytes",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "proxmoxNodeHistory",
-      "dbTableName": "proxmox_node_history",
-      "schemaName": "ProxmoxNodeHistoryRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1425,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "ts",
-          "dbName": "ts",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "cpuPercent",
-          "dbName": "cpu_percent",
-          "jsonType": "number",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "memPercent",
-          "dbName": "mem_percent",
-          "jsonType": "number",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "diskPercent",
-          "dbName": "disk_percent",
-          "jsonType": "number",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "netRxBytes",
-          "dbName": "net_rx_bytes",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "netTxBytes",
-          "dbName": "net_tx_bytes",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "alertRules",
-      "dbTableName": "alert_rules",
-      "schemaName": "AlertRuleRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1442,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enabled",
-          "dbName": "enabled",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": true
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "triggerType",
-          "dbName": "trigger_type",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "thresholdValue",
-          "dbName": "threshold_value",
-          "jsonType": "number",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "thresholdDurationSeconds",
-          "dbName": "threshold_duration_seconds",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "cooldownMinutes",
-          "dbName": "cooldown_minutes",
-          "jsonType": "integer",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": 15
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "notificationChannels",
-      "dbTableName": "notification_channels",
-      "schemaName": "NotificationChannelRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1462,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "type",
-          "dbName": "type",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "config",
-          "dbName": "config",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enabled",
-          "dbName": "enabled",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": true
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "alertRuleChannels",
-      "dbTableName": "alert_rule_channels",
-      "schemaName": "AlertRuleChannelsRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1476,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "ruleId",
-          "dbName": "rule_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "alertRules.id"
-        },
-        {
-          "tsName": "channelId",
-          "dbName": "channel_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "notificationChannels.id"
-        }
-      ]
-    },
-    {
-      "tsVarName": "alertFirings",
-      "dbTableName": "alert_firings",
-      "schemaName": "AlertFiringRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1486,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "ruleId",
-          "dbName": "rule_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "alertRules.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "hostName",
-          "dbName": "host_name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "firedAt",
-          "dbName": "fired_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "resolvedAt",
-          "dbName": "resolved_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "value",
-          "dbName": "value",
-          "jsonType": "number",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "message",
-          "dbName": "message",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "severity",
-          "dbName": "severity",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "warning"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "acknowledged",
-          "dbName": "acknowledged",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "automations",
-      "dbTableName": "automations",
-      "schemaName": "AutomationRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1518,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "description",
-          "dbName": "description",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enabled",
-          "dbName": "enabled",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": true
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "definition",
-          "dbName": "definition",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "definitionVersion",
-          "dbName": "definition_version",
-          "jsonType": "integer",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": 1
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "concurrencyPolicy",
-          "dbName": "concurrency_policy",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "skip"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "maxRunSeconds",
-          "dbName": "max_run_seconds",
-          "jsonType": "integer",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": 300
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "dryRun",
-          "dbName": "dry_run",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "lastRunAt",
-          "dbName": "last_run_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "lastRunStatus",
-          "dbName": "last_run_status",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "automationTriggerState",
-      "dbTableName": "automation_trigger_state",
-      "schemaName": "TriggerStateRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1555,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "automationId",
-          "dbName": "automation_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "automations.id"
-        },
-        {
-          "tsName": "stateKey",
-          "dbName": "state_key",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "breachStartedAt",
-          "dbName": "breach_started_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "lastFiredAt",
-          "dbName": "last_fired_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "lastValue",
-          "dbName": "last_value",
-          "jsonType": "number",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "lastObservedState",
-          "dbName": "last_observed_state",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "automationSchedules",
-      "dbTableName": "automation_schedules",
-      "schemaName": "ScheduleRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1579,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "automationId",
-          "dbName": "automation_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "automations.id"
-        },
-        {
-          "tsName": "cron",
-          "dbName": "cron",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "intervalSeconds",
-          "dbName": "interval_seconds",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "timezone",
-          "dbName": "timezone",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "nextDueAt",
-          "dbName": "next_due_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "lastTickAt",
-          "dbName": "last_tick_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "automationRuns",
-      "dbTableName": "automation_runs",
-      "schemaName": "AutomationRunRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1598,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "automationId",
-          "dbName": "automation_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "automations.id"
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "triggerType",
-          "dbName": "trigger_type",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "triggerContext",
-          "dbName": "trigger_context",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "status",
-          "dbName": "status",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "startedAt",
-          "dbName": "started_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "finishedAt",
-          "dbName": "finished_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "durationMs",
-          "dbName": "duration_ms",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "error",
-          "dbName": "error",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "dryRun",
-          "dbName": "dry_run",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "parentRunId",
-          "dbName": "parent_run_id",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "automationRunSteps",
-      "dbTableName": "automation_run_steps",
-      "schemaName": "AutomationRunStepRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1630,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "runId",
-          "dbName": "run_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "automationRuns.id"
-        },
-        {
-          "tsName": "stepIndex",
-          "dbName": "step_index",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "stepId",
-          "dbName": "step_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "stepType",
-          "dbName": "step_type",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "status",
-          "dbName": "status",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "startedAt",
-          "dbName": "started_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "finishedAt",
-          "dbName": "finished_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "output",
-          "dbName": "output",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "error",
-          "dbName": "error",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "truncated",
-          "dbName": "truncated",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "automationChannels",
-      "dbTableName": "automation_channels",
-      "schemaName": "AutomationChannelsRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1656,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "automationId",
-          "dbName": "automation_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "automations.id"
-        },
-        {
-          "tsName": "channelId",
-          "dbName": "channel_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "notificationChannels.id"
-        }
-      ]
-    },
-    {
-      "tsVarName": "homepageItems",
-      "dbTableName": "homepage_items",
-      "schemaName": "HomepageItemRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1677,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "typeId",
-          "dbName": "type_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "title",
-          "dbName": "title",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "config",
-          "dbName": "config",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "{}"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "folderId",
-          "dbName": "folder_id",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "syncId",
-          "dbName": "sync_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": true
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "homepageLayouts",
-      "dbTableName": "homepage_layouts",
-      "schemaName": "HomepageLayoutRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1699,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": true,
-          "references": "users.id"
-        },
-        {
-          "tsName": "layout",
-          "dbName": "layout",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "{}"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "fleets",
-      "dbTableName": "fleets",
-      "schemaName": "FleetRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1714,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "description",
-          "dbName": "description",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "color",
-          "dbName": "color",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "icon",
-          "dbName": "icon",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "tagRules",
-          "dbName": "tag_rules",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "syncId",
-          "dbName": "sync_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": true
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "fleetMembers",
-      "dbTableName": "fleet_members",
-      "schemaName": "FleetMembersRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1735,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "fleetId",
-          "dbName": "fleet_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "fleets.id"
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "addedAt",
-          "dbName": "added_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "fleetInventory",
-      "dbTableName": "fleet_inventory",
-      "schemaName": "FleetInventoryRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1759,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "hostId",
-          "dbName": "host_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "osPrettyName",
-          "dbName": "os_pretty_name",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "kernel",
-          "dbName": "kernel",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "architecture",
-          "dbName": "architecture",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "hostname",
-          "dbName": "hostname",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "uptimeSeconds",
-          "dbName": "uptime_seconds",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "ip",
-          "dbName": "ip",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "packageManager",
-          "dbName": "package_manager",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "collectedAt",
-          "dbName": "collected_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "userWorkspaces",
-      "dbTableName": "user_workspaces",
-      "schemaName": "WorkspaceRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1789,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "color",
-          "dbName": "color",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "icon",
-          "dbName": "icon",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "kind",
-          "dbName": "kind",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "manual"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "isDefault",
-          "dbName": "is_default",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "payload",
-          "dbName": "payload",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "{}"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "syncId",
-          "dbName": "sync_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": true
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "lastUsedAt",
-          "dbName": "last_used_at",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "syncTombstones",
-      "dbTableName": "sync_tombstones",
-      "schemaName": "SyncTombstoneRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1823,
+      "line": 784,
       "columns": [
         {
           "tsName": "id",
@@ -7699,67 +3077,34 @@
           "unique": false
         },
         {
-          "tsName": "deletedAt",
-          "dbName": "deleted_at",
-          "jsonType": "string",
+          "tsName": "revision",
+          "dbName": "revision",
+          "jsonType": "integer",
           "nullable": false,
           "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
+            "kind": "literal",
+            "value": 0
           },
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "aiProviders",
-      "dbTableName": "ai_providers",
-      "schemaName": "AiProviderRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1842,
-      "columns": [
+        },
         {
-          "tsName": "id",
-          "dbName": "id",
+          "tsName": "seq",
+          "dbName": "seq",
           "jsonType": "integer",
           "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "providerType",
-          "dbName": "provider_type",
-          "jsonType": "string",
-          "nullable": false,
+          "default": {
+            "kind": "literal",
+            "value": 0
+          },
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
         },
         {
-          "tsName": "label",
-          "dbName": "label",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "baseUrl",
-          "dbName": "base_url",
+          "tsName": "hash",
+          "dbName": "hash",
           "jsonType": "string",
           "nullable": true,
           "primaryKey": false,
@@ -7767,55 +3112,32 @@
           "unique": false
         },
         {
-          "tsName": "apiKey",
-          "dbName": "api_key",
-          "jsonType": "string",
-          "maxLength": 8192,
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "apiKeyPrefix",
-          "dbName": "api_key_prefix",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "defaultModel",
-          "dbName": "default_model",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "enabled",
-          "dbName": "enabled",
+          "tsName": "deleted",
+          "dbName": "deleted",
           "jsonType": "boolean",
           "nullable": false,
           "default": {
             "kind": "literal",
-            "value": true
+            "value": false
           },
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
         },
         {
-          "tsName": "createdAt",
-          "dbName": "created_at",
+          "tsName": "error",
+          "dbName": "error",
           "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "errorHash",
+          "dbName": "error_hash",
+          "jsonType": "string",
+          "nullable": true,
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
@@ -7836,11 +3158,11 @@
       ]
     },
     {
-      "tsVarName": "aiConversations",
-      "dbTableName": "ai_conversations",
-      "schemaName": "AiConversationRecord",
+      "tsVarName": "syncConflicts",
+      "dbTableName": "sync_conflicts",
+      "schemaName": "SyncConflictsRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 1871,
+      "line": 819,
       "columns": [
         {
           "tsName": "id",
@@ -7862,113 +3184,37 @@
           "references": "users.id"
         },
         {
-          "tsName": "title",
-          "dbName": "title",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "providerId",
-          "dbName": "provider_id",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "model",
-          "dbName": "model",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
+          "tsName": "entityType",
+          "dbName": "entity_type",
           "jsonType": "string",
           "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
         },
         {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
+          "tsName": "syncId",
+          "dbName": "sync_id",
           "jsonType": "string",
           "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "aiMessages",
-      "dbTableName": "ai_messages",
-      "schemaName": "AiMessageRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1893,
-      "columns": [
+        },
         {
-          "tsName": "id",
-          "dbName": "id",
+          "tsName": "localRow",
+          "dbName": "local_row",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "serverRevision",
+          "dbName": "server_revision",
           "jsonType": "integer",
           "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "conversationId",
-          "dbName": "conversation_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "aiConversations.id"
-        },
-        {
-          "tsName": "role",
-          "dbName": "role",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "content",
-          "dbName": "content",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": ""
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "toolCalls",
-          "dbName": "tool_calls",
-          "jsonType": "string",
-          "nullable": true,
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
@@ -7989,11 +3235,11 @@
       ]
     },
     {
-      "tsVarName": "aiProposals",
-      "dbTableName": "ai_proposals",
-      "schemaName": "AiProposalRecord",
+      "tsVarName": "syncLink",
+      "dbTableName": "sync_link",
+      "schemaName": "SyncLinkRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 1922,
+      "line": 842,
       "columns": [
         {
           "tsName": "id",
@@ -8003,16 +3249,6 @@
           "primaryKey": true,
           "autoIncrement": true,
           "unique": false
-        },
-        {
-          "tsName": "conversationId",
-          "dbName": "conversation_id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "aiConversations.id"
         },
         {
           "tsName": "userId",
@@ -8025,8 +3261,8 @@
           "references": "users.id"
         },
         {
-          "tsName": "kind",
-          "dbName": "kind",
+          "tsName": "serverUrl",
+          "dbName": "server_url",
           "jsonType": "string",
           "nullable": false,
           "primaryKey": false,
@@ -8034,8 +3270,8 @@
           "unique": false
         },
         {
-          "tsName": "summary",
-          "dbName": "summary",
+          "tsName": "serverName",
+          "dbName": "server_name",
           "jsonType": "string",
           "nullable": true,
           "primaryKey": false,
@@ -8043,13 +3279,107 @@
           "unique": false
         },
         {
-          "tsName": "payload",
-          "dbName": "payload",
+          "tsName": "serverVersion",
+          "dbName": "server_version",
           "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "sessionToken",
+          "dbName": "session_token",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "customHeaders",
+          "dbName": "custom_headers",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "basicAuth",
+          "dbName": "basic_auth",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "allowInvalidCertificate",
+          "dbName": "allow_invalid_certificate",
+          "jsonType": "boolean",
           "nullable": false,
           "default": {
             "kind": "literal",
-            "value": "{}"
+            "value": false
+          },
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "remoteUserId",
+          "dbName": "remote_user_id",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "remoteUsername",
+          "dbName": "remote_username",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "account",
+          "dbName": "account",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "scope",
+          "dbName": "scope",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "knownTypes",
+          "dbName": "known_types",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "cursor",
+          "dbName": "cursor",
+          "jsonType": "integer",
+          "nullable": false,
+          "default": {
+            "kind": "literal",
+            "value": 0
           },
           "primaryKey": false,
           "autoIncrement": false,
@@ -8062,15 +3392,15 @@
           "nullable": false,
           "default": {
             "kind": "literal",
-            "value": "pending"
+            "value": "idle"
           },
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
         },
         {
-          "tsName": "appliedAt",
-          "dbName": "applied_at",
+          "tsName": "lastError",
+          "dbName": "last_error",
           "jsonType": "string",
           "nullable": true,
           "primaryKey": false,
@@ -8078,128 +3408,8 @@
           "unique": false
         },
         {
-          "tsName": "resultSummary",
-          "dbName": "result_summary",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "collabRooms",
-      "dbTableName": "collab_rooms",
-      "schemaName": "CollabRoomRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1959,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "ownerUserId",
-          "dbName": "owner_user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "persistent",
-          "dbName": "persistent",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "presenterUserId",
-          "dbName": "presenter_user_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "stageProtocol",
-          "dbName": "stage_protocol",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "stageHostId",
-          "dbName": "stage_host_id",
-          "jsonType": "integer",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "hosts.id"
-        },
-        {
-          "tsName": "stageShareId",
-          "dbName": "stage_share_id",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "sessionShares.id"
-        },
-        {
-          "tsName": "guestLinkToken",
-          "dbName": "guest_link_token",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
+          "tsName": "linkedAt",
+          "dbName": "linked_at",
           "jsonType": "string",
           "nullable": false,
           "default": {
@@ -8211,191 +3421,10 @@
           "unique": false
         },
         {
-          "tsName": "endedAt",
-          "dbName": "ended_at",
+          "tsName": "lastSyncAt",
+          "dbName": "last_sync_at",
           "jsonType": "string",
           "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "collabRoomMembers",
-      "dbTableName": "collab_room_members",
-      "schemaName": "CollabRoomMemberRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 1999,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "integer",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": true,
-          "unique": false
-        },
-        {
-          "tsName": "roomId",
-          "dbName": "room_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "collabRooms.id"
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "roomRole",
-          "dbName": "room_role",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "member"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "addedBy",
-          "dbName": "added_by",
-          "jsonType": "string",
-          "nullable": true,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        }
-      ]
-    },
-    {
-      "tsVarName": "secretSources",
-      "dbTableName": "secret_sources",
-      "schemaName": "SecretSourceRecord",
-      "file": "src/backend/database/db/schema.ts",
-      "line": 2036,
-      "columns": [
-        {
-          "tsName": "id",
-          "dbName": "id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": true,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "userId",
-          "dbName": "user_id",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false,
-          "references": "users.id"
-        },
-        {
-          "tsName": "name",
-          "dbName": "name",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "kind",
-          "dbName": "kind",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": "onepassword-connect"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "baseUrl",
-          "dbName": "base_url",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "token",
-          "dbName": "token",
-          "jsonType": "string",
-          "nullable": false,
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "shared",
-          "dbName": "shared",
-          "jsonType": "boolean",
-          "nullable": false,
-          "default": {
-            "kind": "literal",
-            "value": false
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "createdAt",
-          "dbName": "created_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
-          "primaryKey": false,
-          "autoIncrement": false,
-          "unique": false
-        },
-        {
-          "tsName": "updatedAt",
-          "dbName": "updated_at",
-          "jsonType": "string",
-          "nullable": false,
-          "default": {
-            "kind": "expression",
-            "text": "sql`CURRENT_TIMESTAMP`"
-          },
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false
@@ -8407,7 +3436,7 @@
       "dbTableName": "credential_access",
       "schemaName": "CredentialAccessRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 2067,
+      "line": 880,
       "columns": [
         {
           "tsName": "id",
@@ -8500,7 +3529,7 @@
       "dbTableName": "shared_credential_secrets",
       "schemaName": "SharedCredentialSecretRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 2105,
+      "line": 918,
       "columns": [
         {
           "tsName": "id",
@@ -8652,7 +3681,7 @@
       "dbTableName": "folder_access",
       "schemaName": "FolderAccessRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 2157,
+      "line": 970,
       "columns": [
         {
           "tsName": "id",
@@ -8754,7 +3783,7 @@
       "dbTableName": "plugins",
       "schemaName": "PluginRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 2195,
+      "line": 1008,
       "columns": [
         {
           "tsName": "id",
@@ -8832,6 +3861,15 @@
           "unique": false
         },
         {
+          "tsName": "lastError",
+          "dbName": "last_error",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
           "tsName": "installedAt",
           "dbName": "installed_at",
           "jsonType": "string",
@@ -8886,7 +3924,7 @@
       "dbTableName": "plugin_permission_grants",
       "schemaName": "PluginPermissionGrantRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 2219,
+      "line": 1035,
       "columns": [
         {
           "tsName": "id",
@@ -8933,20 +3971,33 @@
           "tsName": "grantedBy",
           "dbName": "granted_by",
           "jsonType": "string",
-          "nullable": false,
+          "nullable": true,
           "primaryKey": false,
           "autoIncrement": false,
           "unique": false,
           "references": "users.id"
+        },
+        {
+          "tsName": "source",
+          "dbName": "source",
+          "jsonType": "string",
+          "nullable": false,
+          "default": {
+            "kind": "literal",
+            "value": "admin"
+          },
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
         }
       ]
     },
     {
       "tsVarName": "pluginRegistries",
       "dbTableName": "plugin_registries",
-      "schemaName": "PluginRegistryRecord",
+      "schemaName": "PluginRegistriesRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 2244,
+      "line": 1067,
       "columns": [
         {
           "tsName": "id",
@@ -9033,9 +4084,9 @@
     {
       "tsVarName": "pluginInstallCounts",
       "dbTableName": "plugin_install_counts",
-      "schemaName": "PluginInstallCountRecord",
+      "schemaName": "PluginInstallCountsRecord",
       "file": "src/backend/database/db/schema.ts",
-      "line": 2261,
+      "line": 1084,
       "columns": [
         {
           "tsName": "id",
@@ -9093,6 +4144,312 @@
         {
           "tsName": "updatedAt",
           "dbName": "updated_at",
+          "jsonType": "string",
+          "nullable": false,
+          "default": {
+            "kind": "expression",
+            "text": "sql`CURRENT_TIMESTAMP`"
+          },
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "tsVarName": "pluginStorage",
+      "dbTableName": "plugin_storage",
+      "schemaName": "PluginStorageRecord",
+      "file": "src/backend/database/db/schema.ts",
+      "line": 1109,
+      "columns": [
+        {
+          "tsName": "id",
+          "dbName": "id",
+          "jsonType": "integer",
+          "nullable": false,
+          "primaryKey": true,
+          "autoIncrement": true,
+          "unique": false
+        },
+        {
+          "tsName": "pluginId",
+          "dbName": "plugin_id",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false,
+          "references": "plugins.id"
+        },
+        {
+          "tsName": "key",
+          "dbName": "key",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "value",
+          "dbName": "value",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "updatedAt",
+          "dbName": "updated_at",
+          "jsonType": "string",
+          "nullable": false,
+          "default": {
+            "kind": "expression",
+            "text": "sql`CURRENT_TIMESTAMP`"
+          },
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "tsVarName": "pluginSettings",
+      "dbTableName": "plugin_settings",
+      "schemaName": "PluginSettingsRecord",
+      "file": "src/backend/database/db/schema.ts",
+      "line": 1139,
+      "columns": [
+        {
+          "tsName": "id",
+          "dbName": "id",
+          "jsonType": "integer",
+          "nullable": false,
+          "primaryKey": true,
+          "autoIncrement": true,
+          "unique": false
+        },
+        {
+          "tsName": "pluginId",
+          "dbName": "plugin_id",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false,
+          "references": "plugins.id"
+        },
+        {
+          "tsName": "scope",
+          "dbName": "scope",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "scopeId",
+          "dbName": "scope_id",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "key",
+          "dbName": "key",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "value",
+          "dbName": "value",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "encrypted",
+          "dbName": "encrypted",
+          "jsonType": "boolean",
+          "nullable": false,
+          "default": {
+            "kind": "literal",
+            "value": false
+          },
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "updatedAt",
+          "dbName": "updated_at",
+          "jsonType": "string",
+          "nullable": false,
+          "default": {
+            "kind": "expression",
+            "text": "sql`CURRENT_TIMESTAMP`"
+          },
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "tsVarName": "pluginMigrations",
+      "dbTableName": "plugin_migrations",
+      "schemaName": "PluginMigrationRecord",
+      "file": "src/backend/database/db/schema.ts",
+      "line": 1177,
+      "columns": [
+        {
+          "tsName": "id",
+          "dbName": "id",
+          "jsonType": "integer",
+          "nullable": false,
+          "primaryKey": true,
+          "autoIncrement": true,
+          "unique": false
+        },
+        {
+          "tsName": "pluginId",
+          "dbName": "plugin_id",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false,
+          "references": "plugins.id"
+        },
+        {
+          "tsName": "migrationId",
+          "dbName": "migration_id",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "checksum",
+          "dbName": "checksum",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "appliedAt",
+          "dbName": "applied_at",
+          "jsonType": "string",
+          "nullable": false,
+          "default": {
+            "kind": "expression",
+            "text": "sql`CURRENT_TIMESTAMP`"
+          },
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "tsVarName": "rbacKnownPermissions",
+      "dbTableName": "rbac_known_permissions",
+      "schemaName": "RbacKnownPermissionRecord",
+      "file": "src/backend/database/db/schema.ts",
+      "line": 1210,
+      "columns": [
+        {
+          "tsName": "id",
+          "dbName": "id",
+          "jsonType": "integer",
+          "nullable": false,
+          "primaryKey": true,
+          "autoIncrement": true,
+          "unique": false
+        },
+        {
+          "tsName": "permission",
+          "dbName": "permission",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "pluginId",
+          "dbName": "plugin_id",
+          "jsonType": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "firstSeenAt",
+          "dbName": "first_seen_at",
+          "jsonType": "string",
+          "nullable": false,
+          "default": {
+            "kind": "expression",
+            "text": "sql`CURRENT_TIMESTAMP`"
+          },
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "tsVarName": "rbacAppliedDefaults",
+      "dbTableName": "rbac_applied_defaults",
+      "schemaName": "RbacAppliedDefaultRecord",
+      "file": "src/backend/database/db/schema.ts",
+      "line": 1234,
+      "columns": [
+        {
+          "tsName": "id",
+          "dbName": "id",
+          "jsonType": "integer",
+          "nullable": false,
+          "primaryKey": true,
+          "autoIncrement": true,
+          "unique": false
+        },
+        {
+          "tsName": "roleName",
+          "dbName": "role_name",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "permission",
+          "dbName": "permission",
+          "jsonType": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "autoIncrement": false,
+          "unique": false
+        },
+        {
+          "tsName": "appliedAt",
+          "dbName": "applied_at",
           "jsonType": "string",
           "nullable": false,
           "default": {
